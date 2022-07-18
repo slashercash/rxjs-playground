@@ -1,4 +1,5 @@
-export type SimplePokemon = {
+export type Pokemon = {
   name: string;
   url: string;
+  selected?: boolean;
 };

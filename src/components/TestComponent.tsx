@@ -1,15 +1,33 @@
 import { useObservableState } from 'observable-hooks';
-import { allPokemons$, testString$ } from '../observables/Observables';
+import {
+  pokemons$,
+  selectedPokemonIds$,
+  testString$,
+} from '../observables/Observables';
 
 const TestComponent = () => {
   useObservableState(testString$);
+  const pokemons = useObservableState(pokemons$, []);
 
   return (
     <>
       <div>TestComponent</div>
       <div>{testString$.value}</div>
-      {allPokemons$.value.map((p, i) => (
-        <div key={i}>{p.name}</div>
+      {pokemons.map((p, i) => (
+        <div key={i}>
+          <input
+            type='checkbox'
+            checked={p.selected}
+            onChange={() => {
+              selectedPokemonIds$.next(
+                p.selected
+                  ? selectedPokemonIds$.value.filter((id) => id !== i)
+                  : [...selectedPokemonIds$.value, i]
+              );
+            }}
+          />
+          <div key={i}>{p.name}</div>
+        </div>
       ))}
     </>
   );
