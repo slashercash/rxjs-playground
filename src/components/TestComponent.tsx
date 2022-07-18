@@ -26,7 +26,9 @@ const TestComponent = () => {
               );
             }}
           />
-          <div key={i}>{p.name}</div>
+          <div key={i}>
+            {p.name} {p.info}
+          </div>
         </div>
       ))}
     </>

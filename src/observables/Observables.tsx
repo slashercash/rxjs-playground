@@ -1,5 +1,8 @@
-import { BehaviorSubject, combineLatestWith, map } from 'rxjs';
-import { getAllPokemons } from '../api-connector/apiConnector';
+import { BehaviorSubject, combineLatestWith, map, switchMap } from 'rxjs';
+import {
+  getAllPokemons,
+  getPokemonInfoByName,
+} from '../api-connector/apiConnector';
 import { Pokemon } from '../types/Types';
 
 const rawPokemons$ = new BehaviorSubject<Pokemon[]>([]);
@@ -13,6 +16,16 @@ export const pokemons$ = rawPokemons$.pipe(
       ...p,
       selected: selectedPokemonIds.includes(i),
     }))
+  ),
+  switchMap((pokemons) =>
+    Promise.all(
+      pokemons.map(
+        async (p): Promise<Pokemon> => ({
+          ...p,
+          info: p.selected ? await getPokemonInfoByName(p.name) : undefined,
+        })
+      )
+    )
   )
 );
 
