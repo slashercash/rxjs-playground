@@ -1,17 +1,14 @@
-import axios from 'axios';
-
-const getByAxios = async () => {
-  const res = await axios({
-    method: 'get',
-    url: 'https://pokeapi.co/api/v2/pokemon/?limit=1000',
-  });
-  return res.data.results;
-};
+import Search from './components/Search';
+import TestComponent from './components/TestComponent';
+import { PokemonProvider } from './pokemon-provider/PokemonProvider';
 
 const App = () => {
-  getByAxios().then((x) => console.log(x));
-
-  return <div>Hello World</div>;
+  return (
+    <PokemonProvider>
+      <Search />
+      <TestComponent />
+    </PokemonProvider>
+  );
 };
 
 export default App;
