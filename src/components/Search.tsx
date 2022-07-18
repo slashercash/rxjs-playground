@@ -1,19 +1,15 @@
 import { useObservableState } from 'observable-hooks';
-import { getAllPokemons } from '../api-connector/apiConnector';
-import { usePokemon } from '../pokemon-provider/PokemonProvider';
+import { testString$ } from '../observables/Observables';
 
 const Search = () => {
-  //   getAllPokemons().then((p) => console.log(p));
-
-  const { testString$ } = usePokemon();
-  const testString = useObservableState(testString$, testString$.value);
+  useObservableState(testString$);
 
   return (
     <>
       <div>Search</div>
       <input
         type='text'
-        value={testString}
+        value={testString$.value}
         onChange={(e) => testString$.next(e.target.value)}
       />
     </>

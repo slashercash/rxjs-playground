@@ -1,14 +1,16 @@
 import { useObservableState } from 'observable-hooks';
-import { usePokemon } from '../pokemon-provider/PokemonProvider';
+import { allPokemons$, testString$ } from '../observables/Observables';
 
 const TestComponent = () => {
-  const { testString$ } = usePokemon();
-  const testString = useObservableState(testString$, testString$.value);
+  useObservableState(testString$);
 
   return (
     <>
       <div>TestComponent</div>
-      <div>{testString}</div>
+      <div>{testString$.value}</div>
+      {allPokemons$.value.map((p, i) => (
+        <div key={i}>{p.name}</div>
+      ))}
     </>
   );
 };
