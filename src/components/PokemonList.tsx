@@ -1,7 +1,15 @@
+import styled from 'styled-components';
 import { useObservableState } from '../custom-hooks/CustomHooks';
 import { pokemons$ } from '../observables/Pokemons';
 import { selectedPokemonNames$ } from '../observables/SelectedPokemonNames';
 import { Pokemon } from '../types/Pokemon';
+
+const StyledDiv = styled.div`
+  border: 2px solid black;
+  > div {
+    display: flex;
+  }
+`;
 
 const PokemonList = () => {
   const pokemons: Pokemon[] = useObservableState(pokemons$, []);
@@ -15,7 +23,7 @@ const PokemonList = () => {
   };
 
   return (
-    <>
+    <StyledDiv>
       {pokemons.map((p, i) => (
         <div key={i}>
           <input
@@ -28,7 +36,7 @@ const PokemonList = () => {
           </div>
         </div>
       ))}
-    </>
+    </StyledDiv>
   );
 };
 

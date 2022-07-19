@@ -10,7 +10,7 @@ export const useObservableState = <T>(
   useEffect(() => {
     const sub = observable.subscribe((p) => setstate(p));
     return () => sub.unsubscribe();
-  });
+  }, []);
 
   return state;
 };
