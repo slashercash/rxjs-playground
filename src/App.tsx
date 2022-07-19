@@ -1,11 +1,9 @@
-import Search from './components/Search';
-import TestComponent from './components/TestComponent';
+import PokemonList from './components/PokemonList';
 
 const App = () => {
   return (
     <>
-      <Search />
-      <TestComponent />
+      <PokemonList />
     </>
   );
 };

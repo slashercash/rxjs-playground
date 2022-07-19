@@ -1,9 +1,9 @@
-import { useObservableState } from 'observable-hooks';
+import { useObservableState } from '../custom-hooks/CustomHooks';
 import { pokemons$ } from '../observables/Pokemons';
 import { selectedPokemonNames$ } from '../observables/SelectedPokemonNames';
 import { Pokemon } from '../types/Pokemon';
 
-const TestComponent = () => {
+const PokemonList = () => {
   const pokemons: Pokemon[] = useObservableState(pokemons$, []);
 
   const handleOnChange = (pokemon: Pokemon) => {
@@ -32,4 +32,4 @@ const TestComponent = () => {
   );
 };
 
-export default TestComponent;
+export default PokemonList;
